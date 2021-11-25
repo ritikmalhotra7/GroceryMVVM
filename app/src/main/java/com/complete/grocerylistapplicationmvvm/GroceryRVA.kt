@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.complete.grocerylistapplicationmvvm.databinding.ActivityMainBinding
 import com.complete.grocerylistapplicationmvvm.databinding.RecyclerItemBinding
 
-class GroceryRVA(val list : List<GroceryItems>,val groceryItemClickInterface: GroceryItemClickInterface) :
+class GroceryRVA(var list : List<GroceryItems>, val groceryItemClickInterface: GroceryItemClickInterface) :
     RecyclerView.Adapter<GroceryRVA.GroceryViewHolder>() {
     interface GroceryItemClickInterface {
         fun onItemClick(groceryItems: GroceryItems)
@@ -25,7 +25,7 @@ class GroceryRVA(val list : List<GroceryItems>,val groceryItemClickInterface: Gr
     override fun onBindViewHolder(holder: GroceryViewHolder, position: Int) {
         holder.binding.itemName.text = list.get(position).itemName
         holder.binding.quantity.text = list.get(position).itemQuantity.toString()
-        holder.binding.rate.text = list.get(position).itemPrice.toString()
+        holder.binding.rate.text = "Rs."+list.get(position).itemPrice.toString()+" each"
         val total :Int = (list.get(position).itemPrice).toInt() * (list.get(position).itemQuantity).toInt()
         holder.binding.amt.text = "Rs."+total
         holder.binding.delete.setOnClickListener{
